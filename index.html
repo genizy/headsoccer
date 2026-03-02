@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<base href="https://cdn.jsdelivr.net/gh/genizy/headsoccer@4617386ae61a332808420bbbec0b081dcbc9cd9f/">
+	<base href="https://cdn.jsdelivr.net/gh/genizy/headsoccer@170252b56f83403fa500b2ffa7a7f2dc6dd269b8/">
     <meta charset="UTF-8">
 	<title>Head Soccer 2026</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
@@ -20,6 +20,14 @@
 
 
     <script>
+				window.createworker2 = async function(e, t) {
+			fetch(e).then(res => res.text()).then(text => {
+				const blobData = [text];
+const blob = new Blob(blobData, { type: "text/javascript" });
+const url = URL.createObjectURL(blob);
+return new Worker(url, t);
+			});
+		}
         document.addEventListener('DOMContentLoaded', (event) => {
             function preventDefaultTouchActions(event) {
                 event.preventDefault();
