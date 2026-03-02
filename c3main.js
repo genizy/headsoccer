@@ -26,7 +26,7 @@ var __create = Object.create,
 		enumerable: !0
 	}), t)),
 	require_c3runtime = __commonJS({
-		"file-map:scripts/c3runtime.js"(exports, module) {
+		"file-map:c3runtime.js"(exports, module) {
 			{
 				let e = function(t) {
 						ARRAY_TYPE = t

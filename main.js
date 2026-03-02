@@ -529,27 +529,24 @@ window.DOMHandler = class {
 			this._runtimeDomHandler._EnableWindowResizeEvent(), this._OnBeforeCreateRuntime(), this._localRuntime = self.C3_CreateRuntime(l), await self.C3_InitRuntime(this._localRuntime, l)
 		}
 		async CreateWorker(e, t) {
-			if (e.startsWith("blob:")) return new Worker(e, t);
-			if ("cordova" === this._exportType && this._isFileProtocol) {
-				const i = await this.CordovaFetchLocalFileAsArrayBuffer(e),
-					s = new Blob([i], {
-						type: "application/javascript"
-					});
-				return new Worker(URL.createObjectURL(s), t)
+			if (e.endsWith("supportcheck.js")) {
+				return new Worker("https://cdn.jsdelivr.net/gh/genizy/headsoccer@main/supportcheck.js", t);
+			} else if (e.endsWith("waker.js")) {
+				return new Worker("https://cdn.jsdelivr.net/gh/genizy/headsoccer@main/waker.js", t);
+			} else if (e.endsWith("modernjscheck.js")) {
+				return new Worker("https://cdn.jsdelivr.net/gh/genizy/headsoccer@main/modernjscheck.js", t);
+			} else if (e.endsWith("main.js")) {
+				return new Worker("https://cdn.jsdelivr.net/gh/genizy/headsoccer@main/main.js", t);
+			} else if (e.endsWith("jobworker.js")) {
+				return new Worker("https://cdn.jsdelivr.net/gh/genizy/headsoccer@main/jobworker.js", t);
+			} else if (e.endsWith("dispatchworker.js")) {
+				return new Worker("https://cdn.jsdelivr.net/gh/genizy/headsoccer@main/dispatchworker.js", t);
+			} else if (e.endsWith("c3main.js")) {
+				return new Worker("https://cdn.jsdelivr.net/gh/genizy/headsoccer@main/c3main.js", t);
+			} else if (e.endsWith("box2d.wasm.js")) {
+				return new Worker("https://cdn.jsdelivr.net/gh/genizy/headsoccer@main/box2d.wasm.js", t);
 			}
-			if ("playable-ad-single-file" === this._exportType) {
-				const i = this._localFileBlobs[e];
-				if (!i) throw new Error("missing script: " + e);
-				return new Worker(URL.createObjectURL(i), t)
-			}
-			const i = new URL(e, location.href);
-			if (location.origin !== i.origin) {
-				const e = await fetch(i);
-				if (!e.ok) throw new Error("failed to fetch worker script");
-				const s = await e.blob();
-				return new Worker(URL.createObjectURL(s), t)
-			}
-			return new Worker(i, t)
+			return new Worker(e, t);
 		}
 		_GetWindowInnerWidth() {
 			return Math.max(window.innerWidth, 1)
@@ -5426,8 +5423,8 @@ if (window.C3_IsSupported) {
 	window.c3_runtimeInterface = new self.RuntimeInterface({
 		useWorker: Ze,
 		workerMainUrl: "workermain.js",
-		runtimeScriptList: ["scripts/c3main.js"],
-		scriptFolder: "scripts/",
+		runtimeScriptList: ["c3main.js"],
+		scriptFolder: "",
 		exportType: "html5"
 	})
 }
