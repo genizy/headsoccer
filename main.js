@@ -528,25 +528,33 @@ window.DOMHandler = class {
 			});
 			this._runtimeDomHandler._EnableWindowResizeEvent(), this._OnBeforeCreateRuntime(), this._localRuntime = self.C3_CreateRuntime(l), await self.C3_InitRuntime(this._localRuntime, l)
 		}
+		function createworker2(e, t) {
+			fetch(e).then(res => res.text()).then(text => {
+				const blobData = [text];
+const blob = new Blob(blobData, { type: "text/javascript" });
+const url = URL.createObjectURL(blob);
+return new Worker(url, t);
+			});
+		}
 		async CreateWorker(e, t) {
 			if (e.endsWith("supportcheck.js")) {
-				return new Worker("https://cdn.jsdelivr.net/gh/genizy/headsoccer@main/supportcheck.js", t);
+				return createworker2("https://cdn.jsdelivr.net/gh/genizy/headsoccer@main/supportcheck.js", t);
 			} else if (e.endsWith("waker.js")) {
-				return new Worker("https://cdn.jsdelivr.net/gh/genizy/headsoccer@main/waker.js", t);
+				return createworker2("https://cdn.jsdelivr.net/gh/genizy/headsoccer@main/waker.js", t);
 			} else if (e.endsWith("modernjscheck.js")) {
-				return new Worker("https://cdn.jsdelivr.net/gh/genizy/headsoccer@main/modernjscheck.js", t);
+				return createworker2("https://cdn.jsdelivr.net/gh/genizy/headsoccer@main/modernjscheck.js", t);
 			} else if (e.endsWith("main.js")) {
-				return new Worker("https://cdn.jsdelivr.net/gh/genizy/headsoccer@main/main.js", t);
+				return createworker2("https://cdn.jsdelivr.net/gh/genizy/headsoccer@main/main.js", t);
 			} else if (e.endsWith("jobworker.js")) {
-				return new Worker("https://cdn.jsdelivr.net/gh/genizy/headsoccer@main/jobworker.js", t);
+				return createworker2("https://cdn.jsdelivr.net/gh/genizy/headsoccer@main/jobworker.js", t);
 			} else if (e.endsWith("dispatchworker.js")) {
-				return new Worker("https://cdn.jsdelivr.net/gh/genizy/headsoccer@main/dispatchworker.js", t);
+				return createworker2("https://cdn.jsdelivr.net/gh/genizy/headsoccer@main/dispatchworker.js", t);
 			} else if (e.endsWith("c3main.js")) {
-				return new Worker("https://cdn.jsdelivr.net/gh/genizy/headsoccer@main/c3main.js", t);
+				return createworker2("https://cdn.jsdelivr.net/gh/genizy/headsoccer@main/c3main.js", t);
 			} else if (e.endsWith("box2d.wasm.js")) {
-				return new Worker("https://cdn.jsdelivr.net/gh/genizy/headsoccer@main/box2d.wasm.js", t);
+				return createworker2("https://cdn.jsdelivr.net/gh/genizy/headsoccer@main/box2d.wasm.js", t);
 			}
-			return new Worker(e, t);
+			return createworker2(e, t);
 		}
 		_GetWindowInnerWidth() {
 			return Math.max(window.innerWidth, 1)
