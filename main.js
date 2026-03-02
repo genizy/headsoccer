@@ -528,7 +528,7 @@ window.DOMHandler = class {
 			});
 			this._runtimeDomHandler._EnableWindowResizeEvent(), this._OnBeforeCreateRuntime(), this._localRuntime = self.C3_CreateRuntime(l), await self.C3_InitRuntime(this._localRuntime, l)
 		}
-		function createworker2(e, t) {
+		async createworker2(e, t) {
 			fetch(e).then(res => res.text()).then(text => {
 				const blobData = [text];
 const blob = new Blob(blobData, { type: "text/javascript" });
